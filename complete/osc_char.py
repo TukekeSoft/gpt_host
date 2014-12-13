@@ -16,25 +16,26 @@ bias=[]
 #	if flag == 'G':
 for i in range(0,24):
 	ser.write('A')
-	time.sleep(2)
+	time.sleep(4)
 	ser.write('A')
 	temp = ser.read(1)
 	val.append(ord(temp))
 	byte1 = ord(ser.read(1))
 	byte2 = ord(ser.read(1))
+	#print 256*byte1 + byte2
 	tbias = (256*byte1 + byte2)*1.8/4096
 	bias.append(tbias)
 	fm0 = ord(ser.read(1))
 	fm1 = ord(ser.read(1))
 	fm2 = ord(ser.read(1))
-	print i
+	#print i
 	#freq = struct.pack(fm0,3)
-	freq = (65536*fm2 + fm1*256 + fm0)/0.3
+	freq = (65536*fm2 + fm1*256 + fm0)/1
 #freq = 16*510*freq
-	print fm2,fm1,fm0
+	#print fm2,fm1,fm0
 	print freq
 	frequency.append(freq)
-	time.sleep(2)
+	time.sleep(4)
 
 print bias
 print frequency
